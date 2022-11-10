@@ -2,6 +2,7 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import List from './List';
+import Addlist from './Addlist';
 import { Button } from 'react-bootstrap';
 
 function Workspace(props){
@@ -13,7 +14,7 @@ function Workspace(props){
         <h3>{props.workspaceName}</h3>
         <div>
             {lists}
-            <Button >Add List</Button>
+            <Addlist/>
         </div>
     </div>
     )
