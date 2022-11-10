@@ -6,6 +6,31 @@
   height: 40vmin;
   pointer-events: none;
 }
+#Workspace {
+  margin: 30px 60px;
+  text-align: left;
+}
+#List {
+  margin: 10px;
+  background-color: rgb(231, 231, 231);
+  border-radius: 10px;
+  width: 300px;
+  padding: 10px;
+  float: left;
+  box-shadow: 0 2px 2px 0;
+}
+#Card {
+  margin: 10px 0;
+  padding: 5px;
+  width: 100%;
+  background-color: rgb(216, 216, 216);
+  border-radius: 5px;
+  box-shadow: 0 1px 1px 0;
+}
+Button {
+  margin: 2px;
+}
+
 
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
