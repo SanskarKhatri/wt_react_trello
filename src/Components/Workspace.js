@@ -4,31 +4,31 @@ import { useNavigate } from 'react-router';
 import { Button, Form } from 'react-bootstrap';
 
 function Workspace(props){
-    const [records, setRecords] = useState([]);
+    const [lists, setLists] = useState([]);
     const [listName, setListName] = useState("");
     const navigate = useNavigate();
     useEffect(() => {
-        async function getRecords() {
+        async function getLists() {
           const response = await fetch(`http://localhost:5000/record/`);
           if (!response.ok) {
             const message = `An error occurred: ${response.statusText}`;
             window.alert(message);
             return;
           }
-          const records = await response.json();
-          setRecords(records);
+          const lists = await response.json();
+          setLists(lists);
         }
-        getRecords();
+        getLists();
         return;
-      }, [records.length]);
-      function recordList() {
-        return records.map((record) => {
+      }, [lists.length]);
+      function allLists() {
+        return lists.map((list) => {
           return (
             <List
-              listHeading={record.name}
-              cards={record.cards}
-              key={record._id}
-              deleteList={()=>deleteList(record._id)}
+              listHeading={list.name}
+              key={list._id}
+              _id={list._id}
+              deleteList={()=>deleteList(list._id)}
             />
           );
         });
@@ -37,8 +37,8 @@ function Workspace(props){
         await fetch(`http://localhost:5000/${id}`, {
           method: "DELETE"
         });
-        const newRecords = records.filter((list) => list._id !== id);
-        setRecords(newRecords);
+        const newLists = lists.filter((list) => list._id !== id);
+        setLists(newLists);
       }
     async function onSubmit(e){
         e.preventDefault();
@@ -54,7 +54,7 @@ function Workspace(props){
         window.alert(error);
         return;
         });
-        setRecords(current => [...current, newList]);
+        setLists(current => [...current, newList]);
         setListName("");
         navigate("/",{ replace: true });
     }
@@ -65,7 +65,7 @@ function Workspace(props){
     <div id="Workspace">
         <h3>{props.workspaceName}</h3>
         <div>
-            {recordList()}
+            {allLists()}
             <div id="newlist">
                 <Form onSubmit={onSubmit}>
                 <Form.Group className="mb-3" controlId="formBasicEmail">

@@ -71,3 +71,11 @@ Button {
   box-shadow: 0 2px 2px 0;
 
 }
+#newCard {
+  margin: 10px 0;
+  padding: 5px;
+  width: 100%;
+  background-color: rgb(216, 216, 216);
+  border-radius: 5px;
+  box-shadow: 0 1px 1px 0;
+}
