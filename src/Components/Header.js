@@ -7,11 +7,11 @@ function Header() {
     <>
       <Navbar bg="primary" variant="dark">
         <Container>
-          <Navbar.Brand href="#home">Trello</Navbar.Brand>
+          <Navbar.Brand href="home">Trello</Navbar.Brand>
           <Nav className="me-auto">
-            <Nav.Link href="#home">Home</Nav.Link>
-            <Nav.Link href="#features">Workspaces</Nav.Link>
-            <Nav.Link href="#pricing">Settings</Nav.Link>
+            <Nav.Link href="home">Home</Nav.Link>
+            <Nav.Link href="workspaces">Workspaces</Nav.Link>
+            <Nav.Link href="settings">Settings</Nav.Link>
           </Nav>
         </Container>
       </Navbar>
