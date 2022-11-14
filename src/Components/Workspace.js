@@ -42,6 +42,7 @@ function Workspace(props){
         setLists(newLists);
       }
     async function onSubmit(e){
+      if(listName){
         e.preventDefault();
         const newList = {name: listName};
         await fetch("http://localhost:5000/record/addList", {
@@ -58,6 +59,9 @@ function Workspace(props){
         getLists();
         setListName("");
         navigate("/",{ replace: true });
+      } else {
+        window.alert("Cannot insert empty list.");
+      }
     }
   function onChange(e){
     return setListName(e.target.value);

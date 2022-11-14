@@ -11,8 +11,19 @@ function Login() {
     function onChange(e){
         setForm({...form, [e.target.id]: e.target.value});
     }
-    function onSubmit(e){
+    async function onSubmit(e){
         e.preventDefault();
+        await fetch("http://localhost:5000/auth", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(form),
+        })
+        .catch(error => {
+        window.alert(error);
+        return;
+        });
         setForm({
             username: "",
             password: ""

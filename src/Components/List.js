@@ -27,7 +27,7 @@ function List(props){
       }, [cards.length]);
     function cardList() {
         if(cards){
-            return cards.map((card, index) => {
+            return cards.map((card) => {
                 return (
                   <Card
                     content={card.content}
@@ -42,27 +42,31 @@ function List(props){
         return setContent(e.target.value);
     }
     async function onSubmit(e){
-      e.preventDefault();
-      const newCard = {
-        currentCards: cards,
-        id: props._id,
-        key: uuidv4(),
-        content: content
-      };
-      await fetch('http://localhost:5000/record/addCard', {
-      method: "POST",
-      headers: {
-          "Content-Type": "application/json",
-      },
-      body: JSON.stringify(newCard),
-      })
-      .catch(error => {
-      window.alert(error);
-      return;
-      });
-      getCards();
-      setContent("");
-      navigate("/",{ replace: true });
+      if(content){
+        e.preventDefault();
+        const newCard = {
+          currentCards: cards,
+          id: props._id,
+          key: uuidv4(),
+          content: content
+        };
+        await fetch('http://localhost:5000/record/addCard', {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(newCard),
+        })
+        .catch(error => {
+        window.alert(error);
+        return;
+        });
+        getCards();
+        setContent("");
+        navigate("/",{ replace: true });
+      } else {
+        window.alert("Cannot insert empty card.");
+      }
   }
   async function deleteCard(key) {
     await fetch(`http://localhost:5000/record/deleteCard/${props._id}/${key}`, {
