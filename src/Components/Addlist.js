@@ -28,6 +28,8 @@ function Addlist() {
   }
   return (
     <div id="newlist">
+      
+      <Button>+ Add List</Button>
     <Form onSubmit={onSubmit}>
       <Form.Group className="mb-3" controlId="formBasicEmail">
         <Form.Control type="text" placeholder="Enter List Name" value={listName} onChange={onChange}/>
