@@ -5,6 +5,9 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background: linear-gradient(rgba(221, 160, 160, 0.5),rgba(164, 214, 164,0.5)),url(../public/images/trellobg2.jpg);
+  object-fit: cover;
+  
 }
 
 code {
