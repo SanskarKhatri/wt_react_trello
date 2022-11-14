@@ -7,17 +7,17 @@ function Workspace(props){
     const [lists, setLists] = useState([]);
     const [listName, setListName] = useState("");
     const navigate = useNavigate();
+    async function getLists() {
+      const response = await fetch(`http://localhost:5000/record/`);
+      if (!response.ok) {
+        const message = `An error occurred: ${response.statusText}`;
+        window.alert(message);
+        return;
+      }
+      const lists = await response.json();
+      setLists(lists);
+    }
     useEffect(() => {
-        async function getLists() {
-          const response = await fetch(`http://localhost:5000/record/`);
-          if (!response.ok) {
-            const message = `An error occurred: ${response.statusText}`;
-            window.alert(message);
-            return;
-          }
-          const lists = await response.json();
-          setLists(lists);
-        }
         getLists();
         return;
       }, [lists.length]);
@@ -29,6 +29,7 @@ function Workspace(props){
               key={list._id}
               _id={list._id}
               deleteList={()=>deleteList(list._id)}
+              cards={list.cards}
             />
           );
         });
@@ -54,7 +55,7 @@ function Workspace(props){
         window.alert(error);
         return;
         });
-        setLists(current => [...current, newList]);
+        getLists();
         setListName("");
         navigate("/",{ replace: true });
     }

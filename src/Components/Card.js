@@ -4,8 +4,7 @@ function Card(props){
     return (
     <div id="Card">
         <p>{props.content}</p>
-        <Button>Edit</Button>
-        <Button>Delete</Button>
+        <Button onClick={props.deleteCard}>Delete</Button>
     </div>)
 }
 export default Card;

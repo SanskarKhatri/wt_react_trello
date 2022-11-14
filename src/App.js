@@ -1,5 +1,4 @@
 import { ThemeProvider } from 'react-bootstrap';
-import './App.css';
 import Header from './Components/Header';
 import Workspace from './Components/Workspace';
 
