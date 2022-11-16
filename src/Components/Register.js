@@ -37,7 +37,7 @@ function Register() {
     <Form onSubmit={onSubmit}>
     <Form.Group className="mb-3" controlId="username">
         <Form.Label>Username</Form.Label>
-        <Form.Control type="text" placeholder="Enter username" value={form.username} onChange={onChange} />
+        <Form.Control type="text" placeholder="Enter username" value={form.username} onChange={onChange} required />
       </Form.Group>
       <Form.Group className="mb-3" controlId="email">
         <Form.Label>Email address</Form.Label>
@@ -45,7 +45,7 @@ function Register() {
       </Form.Group>
       <Form.Group className="mb-3" controlId="password">
         <Form.Label>Password</Form.Label>
-        <Form.Control type="password" placeholder="Password" value={form.password} onChange={onChange} />
+        <Form.Control type="password" placeholder="Password" value={form.password} onChange={onChange} required />
       </Form.Group>
       <Button variant="primary" type="submit">
         Submit

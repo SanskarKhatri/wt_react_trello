@@ -26,6 +26,7 @@
   background-color: rgb(216, 216, 216);
   border-radius: 5px;
   box-shadow: 0 1px 1px 0;
+  word-wrap: break-word;
 }
 Button {
   margin: 2px;

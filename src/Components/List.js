@@ -1,15 +1,17 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Button, Form } from "react-bootstrap";
 import { useNavigate } from "react-router";
+import userContext from "../userContext";
 import Card from "./Card";
 const { v4: uuidv4 } = require('uuid');
 
 function List(props){
+    const {user,setUser} = useContext(userContext);
     const [cards, setCards] = useState([]);
     const [content, setContent] = useState("");
     const navigate = useNavigate();
     async function getCards() {
-      const response = await fetch(`http://localhost:5000/record/${props._id}`);
+      const response = await fetch(`http://localhost:5000/${user}/${props._id}`);
       if (!response.ok) {
         const message = `An error occurred: ${response.statusText}`;
         window.alert(message);
@@ -45,12 +47,13 @@ function List(props){
       if(content){
         e.preventDefault();
         const newCard = {
+          user: user,
           currentCards: cards,
           id: props._id,
           key: uuidv4(),
           content: content
         };
-        await fetch('http://localhost:5000/record/addCard', {
+        await fetch('http://localhost:5000/user/addCard', {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
@@ -69,7 +72,7 @@ function List(props){
       }
   }
   async function deleteCard(key) {
-    await fetch(`http://localhost:5000/record/deleteCard/${props._id}/${key}`, {
+    await fetch(`http://localhost:5000/${user}/deleteCard/${props._id}/${key}`, {
       method: "DELETE"
     });
     const newCards = cards.filter((card) => card.key !== key);

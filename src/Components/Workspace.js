@@ -1,14 +1,16 @@
 import List from './List';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { useNavigate } from 'react-router';
 import { Button, Form } from 'react-bootstrap';
+import userContext from '../userContext';
 
 function Workspace(props){
+    const {user,setUser} = useContext(userContext);
     const [lists, setLists] = useState([]);
     const [listName, setListName] = useState("");
     const navigate = useNavigate();
     async function getLists() {
-      const response = await fetch(`http://localhost:5000/record/`);
+      const response = await fetch(`http://localhost:5000/${user}/`);
       if (!response.ok) {
         const message = `An error occurred: ${response.statusText}`;
         window.alert(message);
@@ -35,7 +37,7 @@ function Workspace(props){
         });
       }
       async function deleteList(id) {
-        await fetch(`http://localhost:5000/${id}`, {
+        await fetch(`http://localhost:5000/${user}/deleteList/${id}`, {
           method: "DELETE"
         });
         const newLists = lists.filter((list) => list._id !== id);
@@ -44,8 +46,8 @@ function Workspace(props){
     async function onSubmit(e){
       if(listName){
         e.preventDefault();
-        const newList = {name: listName};
-        await fetch("http://localhost:5000/record/addList", {
+        const newList = {user: user, name: listName};
+        await fetch("http://localhost:5000/user/addList", {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
@@ -68,7 +70,7 @@ function Workspace(props){
   }
     return (
     <div id="Workspace">
-        <h3>{props.workspaceName}</h3>
+        <h3>{user}'s workspace</h3>
         <div>
             {allLists()}
             <div id="newlist">
